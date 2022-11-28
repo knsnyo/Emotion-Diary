@@ -1,6 +1,6 @@
 // style
 import styled from "styled-components"
-import { TEXT, vw } from "./styles"
+import { BLACK, vw } from "./styles"
 
 // component
 import Header from "./Header"
@@ -11,7 +11,7 @@ const Container = styled(View)`
 	justify-content: center;
 	align-items: center;
 	padding: 40px;
-	border: 1px solid ${TEXT};
+	border: 1px solid ${BLACK};
 	border-radius: 40px;
 	margin: 20px;
 `

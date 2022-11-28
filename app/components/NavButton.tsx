@@ -7,14 +7,14 @@ import { StackNavigationProp } from "../navigation/Navigation"
 import { ScreenName, today } from "../type"
 import { useNavigation } from "@react-navigation/native"
 
-type FloatingButtonProps = {
+type NavButtonProps = {
 	nav: ScreenName,
 	children: ReactNode,
 	today: today,
 	disabled: boolean
 }
 
-function NavButton(props: FloatingButtonProps) {
+function NavButton(props: NavButtonProps) {
 	const navigation = useNavigation<StackNavigationProp>()
 
 	const navigationHandler = (nav: ScreenName) => {

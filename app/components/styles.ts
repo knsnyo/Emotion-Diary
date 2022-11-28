@@ -8,5 +8,5 @@ export const vh = (h: number) => Math.floor(height / 100 * h)
 export const PRIMARY = "#0000ff"
 export const DANGER = "#ff0000"
 export const WHITE = "#ffffff"
-export const GRAY = "#dddddd"
-export const TEXT = "#000000"
+export const GRAY = "#aaaaaa"
+export const BLACK = "#000000"

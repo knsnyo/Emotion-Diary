@@ -4,22 +4,23 @@ import uuid from "react-native-uuid"
 
 // style
 import styled from "styled-components/native"
-import { DANGER, GRAY, PRIMARY, TEXT, vh, vw } from "./styles"
+import { DANGER, GRAY, PRIMARY, BLACK, vh, vw } from "./styles"
 
 // component
 import { Text, View, Pressable } from "react-native"
 import Container from "./Container"
 import NavButton from "./NavButton"
 import { ScreenName } from "../type"
+import Swipe from "./Swipe"
 
 const Year = styled(Text)`
 	font-size: 20px;
-	color: ${TEXT};
+	color: ${BLACK};
 `
 
 const Month = styled(Text)`
 	font-size: 30px;
-	color: ${TEXT};
+	color: ${BLACK};
 	margin-bottom: ${vh(5)}px;
 `
 
@@ -54,7 +55,7 @@ const DayText = styled(Text)<DayTextProps>`
 		true === props.isFuture ? GRAY :
 		"일" === props.day ? DANGER :
 		"토" === props.day ? PRIMARY :
-		TEXT
+		BLACK
 	)}
 `
 
@@ -126,13 +127,18 @@ function Calendar() {
 	}, [selectedYear, selectedMonth, dataTotalCount])
 
 	return (
-		<Container>
-			<Year>{selectedYear}</Year>
-			<Month>{month[selectedMonth - 1]}</Month>
-			<DayContainer>
-				{returnDate()}
-			</DayContainer>
-		</Container>
+		<Swipe
+			onSwipeLeft={nextMonth}
+			onSwipeRight={prevMonth}
+		>
+			<Container>
+				<Year>{selectedYear}</Year>
+				<Month>{month[selectedMonth - 1]}</Month>
+				<DayContainer>
+					{returnDate()}
+				</DayContainer>
+			</Container>
+		</Swipe>
 	)
 }
 
