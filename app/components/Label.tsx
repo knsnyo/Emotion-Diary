@@ -7,17 +7,14 @@ import { Text } from "react-native"
 
 type LabelProps = {
 	gray?: boolean,
-	size?: number,
 }
 
-const Label = styled(Text)<LabelProps>`
+const Label = styled(Text) <LabelProps>`
 	font-weight: bold;
 	color: ${props => (
 		props.gray ? GRAY : BLACK
 	)}
-	font-size: ${props =>
-		props.size ? props.size : 14
-	}px
+	font-size: 14px;
 `
 
 export default Label

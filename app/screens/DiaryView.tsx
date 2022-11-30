@@ -1,9 +1,10 @@
 // component
-import Diary from "../components/Diary"
+import Container from "../components/Container"
 
 function DiaryView() {
 	return (
-		<Diary/>
+		<Container>
+		</Container>
 	)
 }
 

@@ -5,7 +5,11 @@ import { vw } from "./styles"
 // component
 import { TextInput } from "react-native"
 
-const Memo = styled(TextInput)`
+type MemoProps = {
+	disable?: boolean,
+}
+
+const Memo = styled(TextInput)<MemoProps>`
 	width: ${vw(90)}px;
 	flex: 1;
 	text-align-vertical: top;

@@ -1,6 +1,6 @@
 // style
 import styled from "styled-components/native"
-import { vw, PRIMARY, WHITE } from "./styles"
+import { vw, BLUE, WHITE } from "./styles"
 
 // component
 import { Pressable, Text } from "react-native"
@@ -12,7 +12,7 @@ const Press = styled(Pressable)`
 	padding: 10px;
 	border-radius: ${vw(5)}px;
 	margin: 10px;
-	background-color: ${PRIMARY};
+	background-color: ${BLUE};
 `
 
 const ButtonLabel = styled(Text)`

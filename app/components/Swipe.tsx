@@ -1,17 +1,19 @@
-import { ReactEventHandler, ReactNode } from "react"
+// component
+import { ReactNode } from "react"
 import GestureRecognizer from "react-native-swipe-gestures"
 
 type SwipeProps = {
-	onSwipeLeft: any,
-	onSwipeRight: any,
+	// I don't know....
+	onSwipeLeft?: any,
+	onSwipeRight?: any,
 	children: ReactNode
 }
 
 function Swipe(props: SwipeProps) {
 	return (
 		<GestureRecognizer
-			onSwipeLeft={props.onSwipeLeft}
-			onSwipeRight={props.onSwipeRight}
+		onSwipeLeft={props.onSwipeLeft}
+		onSwipeRight={props.onSwipeRight}
 		>
 			{props.children}
 		</GestureRecognizer>

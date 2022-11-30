@@ -1,13 +1,13 @@
 // component
-import Container from "../components/Container";
-import Calendar from "../components/Calendar";
-import WriteButton from "../components/WriteButton";
+import Container from "../components/Container"
+import Calendar from "../components/Calendar"
+import WriteButton from "../components/WriteButton"
 
 function Home() {
 	return (
 		<Container>
-			<Calendar/>
-			<WriteButton/>
+			<Calendar />
+			<WriteButton />
 		</Container>
 	)
 }

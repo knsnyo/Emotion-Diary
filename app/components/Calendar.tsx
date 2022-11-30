@@ -4,13 +4,13 @@ import uuid from "react-native-uuid"
 
 // style
 import styled from "styled-components/native"
-import { DANGER, GRAY, PRIMARY, BLACK, vh, vw } from "./styles"
+import { RED, GRAY, BLUE, BLACK, vh, vw } from "./styles"
 
 // component
 import { Text, View, Pressable } from "react-native"
 import Container from "./Container"
 import NavButton from "./NavButton"
-import { ScreenName } from "../type"
+import { ScreenName, week, month } from "../type"
 import Swipe from "./Swipe"
 
 const Year = styled(Text)`
@@ -45,7 +45,7 @@ type DayTextProps = {
 	isFuture?: boolean
 }
 
-const DayText = styled(Text)<DayTextProps>`
+const DayText = styled(Text) <DayTextProps>`
 	width: ${vw(13)}px;
 	height: ${vw(13)}px;
 	font-size: 14px;
@@ -53,9 +53,9 @@ const DayText = styled(Text)<DayTextProps>`
 	text-align: center;
 	color: ${(props) => (
 		true === props.isFuture ? GRAY :
-		"일" === props.day ? DANGER :
-		"토" === props.day ? PRIMARY :
-		BLACK
+			"일" === props.day ? RED :
+				"토" === props.day ? BLUE :
+					BLACK
 	)}
 `
 
@@ -66,19 +66,13 @@ function Calendar() {
 		date: new Date().getDate(),
 		day: new Date().getDay()
 	}
-	let month = [
-		"JANUARY", "FEBRUARY", "MARCH", "APRIL",
-		"MAY", "JUNE", "JULY", "AUGUST",
-		"SEPTEMBER", "OCTOBER", "NOVEMBER", "DECEMBER"
-	]
-	let week = ["일", "월", "화", "수", "목", "금", "토"]
 	const [selectedYear, setSelectedYear] = useState(today.year)
 	const [selectedMonth, setSelectedMonth] = useState(today.month)
 	const dataTotalCount = new Date(selectedYear, selectedMonth, 0).getDate()
 
 	// my wish - slide to change
 	const prevMonth = useCallback(() => {
-		if(1 === selectedMonth) {
+		if (1 === selectedMonth) {
 			setSelectedMonth(12)
 			setSelectedYear(selectedYear - 1)
 		} else {
@@ -87,7 +81,7 @@ function Calendar() {
 	}, [selectedMonth])
 
 	const nextMonth = useCallback(() => {
-		if(12 === selectedMonth) {
+		if (12 === selectedMonth) {
 			setSelectedMonth(1)
 			setSelectedYear(selectedYear + 1)
 		} else {
@@ -97,21 +91,21 @@ function Calendar() {
 
 	const returnDate = useCallback(() => {
 		let date = Array()
-		for(const nowDay of week) {
+		for (const nowDay of week) {
 			const day = new Date(selectedYear, selectedMonth - 1, 1).getDay()
-			if(week[day] === nowDay) {
-				for(let i = 0; i < dataTotalCount; i += 1) {
-					let isFuture = new Date() < new Date(selectedYear, selectedMonth - 1, i + 1) ? true: false
+			if (week[day] === nowDay) {
+				for (let i = 0; i < dataTotalCount; i += 1) {
+					let isFuture = new Date() < new Date(selectedYear, selectedMonth - 1, i + 1) ? true : false
 					date.push(
 						<Day key={i + 1}>
 							<NavButton nav={ScreenName.DiaryWrite}
-							today={{
-								year: selectedYear,
-								month: selectedMonth,
-								date: i + 1,
-								day: week[(day + i) % 7]
-							}}
-							disabled={isFuture}>
+								today={{
+									year: selectedYear,
+									month: selectedMonth,
+									date: i + 1,
+									day: week[(day + i) % 7]
+								}}
+								disabled={isFuture}>
 								<DayText day={week[(day + i) % 7]} isFuture={isFuture}>{i + 1}</DayText>
 							</NavButton>
 						</Day>
@@ -119,7 +113,7 @@ function Calendar() {
 				}
 			} else {
 				date.push(
-					<Day key={`${uuid.v4()}`}/>
+					<Day key={`${uuid.v4()}`} />
 				)
 			}
 		}
@@ -127,18 +121,18 @@ function Calendar() {
 	}, [selectedYear, selectedMonth, dataTotalCount])
 
 	return (
-		<Swipe
-			onSwipeLeft={nextMonth}
-			onSwipeRight={prevMonth}
-		>
-			<Container>
-				<Year>{selectedYear}</Year>
-				<Month>{month[selectedMonth - 1]}</Month>
+		<Container>
+			<Year>{selectedYear}</Year>
+			<Month>{month[selectedMonth - 1]}</Month>
+			<Swipe
+				onSwipeLeft={nextMonth}
+				onSwipeRight={prevMonth}
+			>
 				<DayContainer>
 					{returnDate()}
 				</DayContainer>
-			</Container>
-		</Swipe>
+			</Swipe>
+		</Container>
 	)
 }
 
