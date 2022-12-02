@@ -1,17 +1,21 @@
 // library
-import { useCallback, useState } from "react"
+import { useCallback, useState, useEffect, ReactNode } from "react"
 import uuid from "react-native-uuid"
+import useStore from "../store/zustand"
+import AsyncStorage from "@react-native-async-storage/async-storage"
+import { useIsFocused } from "@react-navigation/native"
 
 // style
 import styled from "styled-components/native"
-import { RED, GRAY, BLUE, BLACK, vh, vw } from "./styles"
+import { RED, GRAY, BLUE, BLACK, vh, vw, BEIGE } from "./styles"
 
 // component
 import { Text, View, Pressable } from "react-native"
 import Container from "./Container"
 import NavButton from "./NavButton"
-import { ScreenName, week, month } from "../type"
+import { ScreenName, WEEK, MONTH, Today, DiaryContent } from "../type"
 import Swipe from "./Swipe"
+import Icon from "react-native-vector-icons/MaterialIcons"
 
 const Year = styled(Text)`
 	font-size: 20px;
@@ -60,17 +64,40 @@ const DayText = styled(Text) <DayTextProps>`
 `
 
 function Calendar() {
-	let today = {
+	const today: Today = {
 		year: new Date().getFullYear(),
 		month: new Date().getMonth() + 1,
 		date: new Date().getDate(),
 		day: new Date().getDay()
 	}
-	const [selectedYear, setSelectedYear] = useState(today.year)
-	const [selectedMonth, setSelectedMonth] = useState(today.month)
+
+	const { diary, initDiary } = useStore()
+	const isFocused = useIsFocused()
+
+	const [test, setTest] = useState<Array<ReactNode>>([])
+	const [selectedYear, setSelectedYear] = useState<number>(today.year)
+	const [selectedMonth, setSelectedMonth] = useState<number>(today.month)
 	const dataTotalCount = new Date(selectedYear, selectedMonth, 0).getDate()
 
-	// my wish - slide to change
+	useEffect(() => {
+		const init = async () => {
+			const item = await AsyncStorage.getItem("diary")
+			const data = await JSON.parse(item || "{}")
+			initDiary(data)
+			setTest(returnDate())
+		}
+		init()
+	}, [isFocused, diary])
+
+	const findDiary = (searchDiary: Today): DiaryContent | undefined => {
+		let result = diary.find((element) => (
+			element.year === searchDiary.year &&
+			element.month === searchDiary.month &&
+			element.date === searchDiary.date
+		))
+		return result
+	}
+
 	const prevMonth = useCallback(() => {
 		if (1 === selectedMonth) {
 			setSelectedMonth(12)
@@ -89,47 +116,59 @@ function Calendar() {
 		}
 	}, [selectedMonth])
 
-	const returnDate = useCallback(() => {
-		let date = Array()
-		for (const nowDay of week) {
-			const day = new Date(selectedYear, selectedMonth - 1, 1).getDay()
-			if (week[day] === nowDay) {
-				for (let i = 0; i < dataTotalCount; i += 1) {
-					let isFuture = new Date() < new Date(selectedYear, selectedMonth - 1, i + 1) ? true : false
-					date.push(
+	const returnDate =
+		//useCallback(
+		(): Array<ReactNode> => {
+			let date = Array()
+			for (const nowDay of WEEK) {
+				const day = new Date(selectedYear, selectedMonth - 1, 1).getDay()
+				if (WEEK[day] === nowDay) {
+					for (let i = 0; i < dataTotalCount; i += 1) {
+						let isFuture = new Date() < new Date(selectedYear, selectedMonth - 1, i + 1) ? true : false
+						let thisDay: Today = {
+							year: selectedYear,
+							month: selectedMonth,
+							date: i + 1,
+							day: WEEK[(day + i) % 7]
+						}
+						let find = findDiary(thisDay)
+						//console.log(thisDay.date, find)
+						date = [...date,
 						<Day key={i + 1}>
-							<NavButton nav={ScreenName.DiaryWrite}
-								today={{
-									year: selectedYear,
-									month: selectedMonth,
-									date: i + 1,
-									day: week[(day + i) % 7]
-								}}
-								disabled={isFuture}>
-								<DayText day={week[(day + i) % 7]} isFuture={isFuture}>{i + 1}</DayText>
+							<NavButton
+								nav={undefined !== find ? ScreenName.DiaryView : ScreenName.DiaryWrite}
+								data={undefined !== find ? find : thisDay}
+								disabled={isFuture}
+							>
+								{
+									undefined !== find
+										? (<Icon name="article" size={vw(10)} color={BEIGE} />)
+										: (<DayText day={WEEK[(day + i) % 7]} isFuture={isFuture}>{i + 1}</DayText>)
+								}
 							</NavButton>
 						</Day>
-					)
-				}
-			} else {
-				date.push(
+						]
+					}
+				} else {
+					date = [...date,
 					<Day key={`${uuid.v4()}`} />
-				)
+					]
+				}
 			}
+			return date
 		}
-		return date
-	}, [selectedYear, selectedMonth, dataTotalCount])
+	//, [selectedYear, selectedMonth, dataTotalCount])
 
 	return (
 		<Container>
 			<Year>{selectedYear}</Year>
-			<Month>{month[selectedMonth - 1]}</Month>
+			<Month>{MONTH[selectedMonth - 1]}</Month>
 			<Swipe
 				onSwipeLeft={nextMonth}
 				onSwipeRight={prevMonth}
 			>
 				<DayContainer>
-					{returnDate()}
+					{test}
 				</DayContainer>
 			</Swipe>
 		</Container>

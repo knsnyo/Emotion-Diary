@@ -1,7 +1,7 @@
 // global 변수?
-export let week = ["일", "월", "화", "수", "목", "금", "토"]
+export let WEEK = ["일", "월", "화", "수", "목", "금", "토"]
 
-export let month = [
+export let MONTH = [
 	"JANUARY", "FEBRUARY", "MARCH", "APRIL",
 	"MAY", "JUNE", "JULY", "AUGUST",
 	"SEPTEMBER", "OCTOBER", "NOVEMBER", "DECEMBER"
@@ -19,20 +19,20 @@ export const enum ScreenName {
 // stack navigator type
 export type StackParamList = {
 	Home: undefined,
-	DiaryView: today,
-	DiaryWrite: today,
+	DiaryView: DiaryContent,
+	DiaryWrite: Today,
 	DiaryList: undefined,
 }
 
 // data
-export type today = {
+export type Today = {
 	year: number,
 	month: number,
 	date: number,
 	day: any,
 }
 
-export type diaryContent = {
+export type DiaryContent = {
 	id: string,
 	memo: string,
 	year: number,

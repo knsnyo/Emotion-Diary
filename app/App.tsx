@@ -23,5 +23,4 @@ component
 navigation
 screen
 type
-database
 */

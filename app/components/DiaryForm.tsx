@@ -16,17 +16,22 @@ import { RouteProp, useNavigation, useRoute } from "@react-navigation/native"
 import { StackNavigationProp } from "../navigation/Navigation"
 
 // type
-import { diaryContent, ScreenName, StackParamList } from "../type"
+import { DiaryContent, ScreenName, StackParamList } from "../type"
+import { addDiary } from "../asyncStorage/AsyncStorage"
 
 type routeProps = RouteProp<StackParamList, ScreenName.DiaryWrite>
 
-function DiaryForm() {
+type DiaryFormProps = {
+	editable?: boolean
+}
+
+function DiaryForm(props: DiaryFormProps) {
 	const navigation = useNavigation<StackNavigationProp>()
 	const route = useRoute<routeProps>()
 	const [memo, setMemo] = useState<string>("")
 
 	const diaryWriteHandler = async () => {
-		const newDiary: diaryContent = {
+		const newDiary: DiaryContent = {
 			id: uuid.v4().toString(),
 			memo: memo,
 			year: route.params.year,
@@ -34,7 +39,7 @@ function DiaryForm() {
 			date: route.params.date,
 			day: route.params.day
 		}
-		console.log(newDiary)
+		await addDiary(newDiary)
 
 		navigation.popToTop()
 	}
