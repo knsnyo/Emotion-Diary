@@ -1,15 +1,20 @@
-// style
-import { BEIGE, vh, vw, WHITE } from "./styles"
+// library
+import Icon from "react-native-vector-icons/MaterialIcons"
 import styled from "styled-components/native"
+import useStore from "../store/zustand"
 
 // component
 import Floating from "./Floating"
 import NavButton from "./NavButton"
-import Icon from "react-native-vector-icons/MaterialIcons"
 
-// type
-import { ScreenName, WEEK, Today, DiaryContent } from "../type"
-import useStore from "../store/zustand"
+// styles
+import { BEIGE, vh, vw, WHITE } from "../styles"
+
+// types
+import { ScreenName, WEEK } from "../types"
+
+// utils
+import { findDiary } from "../utils"
 
 const WriteButtonContainer = styled(Floating)`
 	left: ${vw(50) - 25}px;
@@ -22,6 +27,7 @@ const WriteButtonContainer = styled(Floating)`
 
 function WriteButton() {
 	const { diary } = useStore()
+
 	let today = {
 		year: new Date().getFullYear(),
 		month: new Date().getMonth() + 1,
@@ -29,25 +35,23 @@ function WriteButton() {
 		day: WEEK[new Date().getDay()]
 	}
 
-	const findDiary = (searchDiary: Today): DiaryContent | undefined => {
-		let result = diary.find((element) => (
-			element.year === searchDiary.year &&
-			element.month === searchDiary.month &&
-			element.date === searchDiary.date
-		))
-		return result
-	}
-
 	return (
 		<WriteButtonContainer>
 			<NavButton
-				nav={undefined === findDiary(today) ? ScreenName.DiaryWrite : ScreenName.DiaryView}
-				data={undefined === findDiary(today) ? today : findDiary(today)}
+				nav={
+					findDiary(diary, today) ?
+						ScreenName.DiaryView :
+						ScreenName.DiaryWrite}
+				data={
+					findDiary(diary, today) ?
+						findDiary(diary, today) :
+						today
+				}
 				disabled={false}>
 				{
-					undefined === findDiary(today)
-						? (<Icon name="create" size={20} color={WHITE} />)
-						: (<Icon name="import-contacts" size={20} color={WHITE} />)
+					findDiary(diary, today) ?
+						(<Icon name="import-contacts" size={20} color={WHITE} />) :
+						(<Icon name="create" size={20} color={WHITE} />)
 				}
 			</NavButton>
 		</WriteButtonContainer>

@@ -1,13 +1,17 @@
-// style
+// library
 import styled from "styled-components/native"
-import { GRAY, vw } from "./styles"
 
 // component
 import Container from "./Container"
 import Emotion from "./Emotion"
 import Label from "./Label"
 import NavButton from "./NavButton"
-import { ScreenName } from "../type"
+
+// styles
+import { GRAY, vw } from "../styles"
+
+// types
+import { ScreenName } from "../types"
 
 const DiarySimpleContainer = styled(Container)`
 	flex: none;

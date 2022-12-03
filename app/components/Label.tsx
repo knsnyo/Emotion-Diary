@@ -1,11 +1,14 @@
-// style
+// library
 import styled from "styled-components/native"
-import { BLACK, GRAY } from "./styles"
 
 // component
 import { Text } from "react-native"
 
+// style
+import { BLACK, GRAY } from "../styles"
+
 type LabelProps = {
+
 	gray?: boolean,
 }
 

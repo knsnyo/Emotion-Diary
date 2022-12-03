@@ -1,14 +1,14 @@
+// library
+import { RouteProp, useRoute } from "@react-navigation/native"
+
 // component
 import Container from "./Container"
 import Label from "./Label"
 import Emotion from "./Emotion"
 import Memo from "./Memo"
 
-// navigation
-import { RouteProp, useRoute } from "@react-navigation/native"
-
-// type
-import { ScreenName, StackParamList } from "../type"
+// types
+import { ScreenName, StackParamList } from "../types"
 
 type routeProps = RouteProp<StackParamList, ScreenName.DiaryView>
 

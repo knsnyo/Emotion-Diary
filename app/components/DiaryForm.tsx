@@ -1,6 +1,9 @@
 // library
 import { useState } from "react"
 import uuid from "react-native-uuid"
+import { Pressable } from "react-native"
+import Icon from "react-native-vector-icons/MaterialIcons"
+import { RouteProp, useNavigation, useRoute } from "@react-navigation/native"
 
 // component
 import Container from "./Container"
@@ -8,16 +11,12 @@ import Label from "./Label"
 import Emotion from "./Emotion"
 import Memo from "./Memo"
 import BottomBar from "../components/BottomBar"
-import Icon from "react-native-vector-icons/MaterialIcons"
-import { Pressable } from "react-native"
 
-// navigation
-import { RouteProp, useNavigation, useRoute } from "@react-navigation/native"
-import { StackNavigationProp } from "../navigation/Navigation"
+// types
+import { DiaryContent, ScreenName, StackParamList, StackNavigationProp } from "../types"
 
-// type
-import { DiaryContent, ScreenName, StackParamList } from "../type"
-import { addDiary } from "../asyncStorage/AsyncStorage"
+// utils
+import { addDiary } from "../utils"
 
 type routeProps = RouteProp<StackParamList, ScreenName.DiaryWrite>
 
@@ -55,6 +54,7 @@ function DiaryForm(props: DiaryFormProps) {
 				multiline
 				value={memo}
 				onChangeText={(text) => setMemo(text)}
+				autoFocus
 			/>
 			<BottomBar>
 				<Icon name="photo" size={20} />

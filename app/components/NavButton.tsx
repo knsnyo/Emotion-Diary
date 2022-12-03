@@ -1,17 +1,16 @@
-// component
+// library
 import { Pressable } from "react-native"
 import { ReactNode } from "react"
-
-// navigation
-import { StackNavigationProp } from "../navigation/Navigation"
-import { ScreenName } from "../type"
 import { useNavigation } from "@react-navigation/native"
+
+// types
+import { ScreenName, StackNavigationProp } from "../types"
 
 type NavButtonProps = {
 	nav: ScreenName,
 	children: ReactNode,
 	disabled: boolean,
-	data: any,
+	data?: any,
 }
 
 function NavButton(props: NavButtonProps) {

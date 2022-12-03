@@ -17,10 +17,13 @@ export default App
 
 /*
 comment sequence
-library?
-style
+library
+
 component
 navigation
 screen
+
+style
 type
+util
 */

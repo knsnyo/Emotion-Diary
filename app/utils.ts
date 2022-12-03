@@ -1,10 +1,28 @@
 // library
 import AsyncStorage from "@react-native-async-storage/async-storage"
 
-// type
-import { DiaryContent } from "../type"
+// types
+import { DiaryContent, Today } from "./types"
 
-// add diary
+/* find diary */
+function findDiary(diary: Array<DiaryContent>, searchDiary: Today) {
+	let result: (DiaryContent | boolean) = false
+	if (0 === diary.length) {
+		// no diary
+	} else {
+		let find = diary.find(e => (
+			e.year === searchDiary.year &&
+			e.month === searchDiary.month &&
+			e.date == searchDiary.date &&
+			e.day == searchDiary.day
+		))
+		result = undefined !== find ? find : false
+	}
+	return result
+}
+
+
+/* add diary */
 async function addDiary(newDiary: DiaryContent) {
 	try {
 		const loadDiary = await AsyncStorage.getItem("diary")
@@ -21,7 +39,7 @@ async function addDiary(newDiary: DiaryContent) {
 	}
 }
 
-// delete diary
+/* delete diary */
 async function deleteDiary(deleteDiary: DiaryContent) {
 	try {
 		const loadDiary = await AsyncStorage.getItem("diary")
@@ -33,4 +51,4 @@ async function deleteDiary(deleteDiary: DiaryContent) {
 	}
 }
 
-export { addDiary, deleteDiary }
+export { addDiary, deleteDiary, findDiary }

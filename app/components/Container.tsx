@@ -1,9 +1,9 @@
-// style
+// library
 import styled from "styled-components/native"
-
-// component
 import { SafeAreaView } from "react-native"
-import { WHITE } from "./styles"
+
+// styles
+import { WHITE } from "../styles"
 
 const Container = styled(SafeAreaView)`
 	flex: 1;

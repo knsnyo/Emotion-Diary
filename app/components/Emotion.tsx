@@ -1,9 +1,11 @@
-// style
+// library
 import styled from "styled-components/native"
-import { vw } from "./styles"
 
 // component
 import { Image } from "react-native"
+
+// styles
+import { vw } from "../styles"
 
 const Emotion = styled(Image)`
 	width: ${vw(20)}px;

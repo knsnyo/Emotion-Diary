@@ -1,9 +1,9 @@
-// style
+// library
 import styled from "styled-components/native"
-import { vw, BLUE, WHITE } from "./styles"
-
-// component
 import { Pressable, Text } from "react-native"
+
+// styles
+import { vw, BLUE, WHITE } from "../styles"
 
 const Press = styled(Pressable)`
 	justify-content: center;

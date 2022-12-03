@@ -1,9 +1,11 @@
-// style
+// library
 import styled from "styled-components/native"
-import { GRAY, vh, vw } from "./styles"
 
 // component
 import Floating from "./Floating"
+
+// styles
+import { GRAY, vh, vw } from "../styles"
 
 const BottomBar = styled(Floating)`
 	bottom: 0;

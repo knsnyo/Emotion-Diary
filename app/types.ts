@@ -1,4 +1,7 @@
-// global 변수?
+// library
+import { NativeStackNavigationProp } from "@react-navigation/native-stack"
+
+/* global value */
 export let WEEK = ["일", "월", "화", "수", "목", "금", "토"]
 
 export let MONTH = [
@@ -7,7 +10,7 @@ export let MONTH = [
 	"SEPTEMBER", "OCTOBER", "NOVEMBER", "DECEMBER"
 ]
 
-// screen name
+/* screen name */
 // https://engineering.linecorp.com/ko/blog/typescript-enum-tree-shaking/
 export const enum ScreenName {
 	Home = "Home",
@@ -16,7 +19,7 @@ export const enum ScreenName {
 	DiaryList = "DiaryList",
 }
 
-// stack navigator type
+/* stack navigator type */
 export type StackParamList = {
 	Home: undefined,
 	DiaryView: DiaryContent,
@@ -24,7 +27,9 @@ export type StackParamList = {
 	DiaryList: undefined,
 }
 
-// data
+export type StackNavigationProp = NativeStackNavigationProp<StackParamList>
+
+/* data */
 export type Today = {
 	year: number,
 	month: number,

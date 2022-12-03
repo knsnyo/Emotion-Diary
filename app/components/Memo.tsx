@@ -1,9 +1,11 @@
-// style
+// library
 import styled from "styled-components/native"
-import { BLACK, vw } from "./styles"
 
 // component
 import { TextInput } from "react-native"
+
+// styles
+import { BLACK, vw } from "../styles"
 
 const Memo = styled(TextInput)`
 	width: ${vw(90)}px;

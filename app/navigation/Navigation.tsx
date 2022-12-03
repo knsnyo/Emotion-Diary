@@ -1,17 +1,15 @@
 // navigation
 import { NavigationContainer } from "@react-navigation/native"
-import { createNativeStackNavigator, NativeStackNavigationProp } from "@react-navigation/native-stack"
+import { createNativeStackNavigator } from "@react-navigation/native-stack"
 
-// screen
+// screens
 import Home from "../screens/Home"
 import DiaryView from "../screens/DiaryView"
 import DiaryWrite from "../screens/DiaryWrite"
 import DiaryList from "../screens/DiaryList"
 
-// type
-import { StackParamList, ScreenName } from "../type"
-
-export type StackNavigationProp = NativeStackNavigationProp<StackParamList>
+// types
+import { StackParamList, ScreenName } from "../types"
 
 const Stack = createNativeStackNavigator<StackParamList>()
 

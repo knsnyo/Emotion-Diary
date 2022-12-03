@@ -1,9 +1,11 @@
-// style
+// library
 import styled from "styled-components/native"
-import { BLACK } from "./styles"
 
 // component
 import { Text } from "react-native"
+
+// styles
+import { BLACK } from "../styles"
 
 const Header = styled(Text)`
 	font-size: 30px;

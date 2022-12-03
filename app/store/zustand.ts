@@ -1,8 +1,8 @@
 // library
 import create from "zustand"
 
-// type
-import { DiaryContent } from "../type"
+// types
+import { DiaryContent } from "../types"
 
 type useStoreProps = {
 	diary: Array<DiaryContent>,
@@ -11,7 +11,7 @@ type useStoreProps = {
 }
 
 const useStore = create<useStoreProps>((set) => ({
-	diary: [],
+	diary: [] as Array<DiaryContent>,
 	initDiary: (diaryList: Array<DiaryContent>) => {
 		set((state) => ({ ...state, diary: diaryList }))
 	},

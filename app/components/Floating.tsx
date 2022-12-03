@@ -1,4 +1,4 @@
-// style
+// library
 import styled from "styled-components/native"
 
 // component

@@ -1,6 +1,9 @@
-// size
+// library
 import { Dimensions } from "react-native"
+
 const { width, height } = Dimensions.get("window")
+
+// size
 export const vw = (w: number) => Math.floor(width / 100 * w)
 export const vh = (h: number) => Math.floor(height / 100 * h)
 
