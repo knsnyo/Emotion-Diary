@@ -16,7 +16,7 @@ import { ScreenName, WEEK } from "../types"
 // utils
 import { findDiary } from "../utils"
 
-const WriteButtonContainer = styled(Floating)`
+const ListButtonContainer = styled(Floating)`
 	left: ${vw(50) - 25}px;
 	bottom: ${vh(5)}px;
 	background-color: ${BEIGE};
@@ -25,7 +25,7 @@ const WriteButtonContainer = styled(Floating)`
 	border-radius: 25px;
 `
 
-function WriteButton() {
+function ListButton() {
 	const { diary } = useStore()
 
 	let today = {
@@ -36,26 +36,19 @@ function WriteButton() {
 	}
 
 	return (
-		<WriteButtonContainer>
+		<ListButtonContainer>
 			<NavButton
-				nav={
-					findDiary(diary, today) ?
-						ScreenName.DiaryView :
-						ScreenName.DiaryWrite}
+				nav={ScreenName.DiaryList}
 				data={
 					findDiary(diary, today) ?
 						findDiary(diary, today) :
 						today
 				}
 				disabled={false}>
-				{
-					findDiary(diary, today) ?
-						(<Icon name="import-contacts" size={20} color={WHITE} />) :
-						(<Icon name="create" size={20} color={WHITE} />)
-				}
+				<Icon name="import-contacts" size={20} color={WHITE} />
 			</NavButton>
-		</WriteButtonContainer>
+		</ListButtonContainer>
 	)
 }
 
-export default WriteButton
+export default ListButton

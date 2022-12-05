@@ -45,5 +45,6 @@ export type DiaryContent = {
 	date: number,
 	day: string,
 	pic?: string,
-	emotion?: string
+	emotion?: string,
+	music?: string
 }

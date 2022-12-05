@@ -11,7 +11,7 @@ import NavButton from "./NavButton"
 import { GRAY, vw } from "../styles"
 
 // types
-import { ScreenName } from "../types"
+import { DiaryContent, ScreenName } from "../types"
 
 const DiarySimpleContainer = styled(Container)`
 	flex: none;
@@ -32,23 +32,28 @@ const Date = styled(Container)`
 	align-items: flex-start;
 `
 
-function DiarySimple() {
+type DiarySimpleProps = {
+	diary: DiaryContent
+}
+
+function DiarySimple(props: DiarySimpleProps) {
 	return (
 		<DiarySimpleContainer>
 			<NavButton
 				nav={ScreenName.DiaryView}
 				disabled={false}
+				data={props.diary}
 			>
 				<DiarySimpleHeader>
 					<Emotion
 						source={require("../assets/image/profile.jpg")}
 					/>
 					<Date>
-						<Label>8월 25일</Label>
-						<Label gray>목요일</Label>
+						<Label>{props.diary.month}월 {props.diary.date}일</Label>
+						<Label gray>{props.diary.day}요일</Label>
 					</Date>
 				</DiarySimpleHeader>
-				<Label>내용</Label>
+				<Label>{props.diary.memo}</Label>
 			</NavButton>
 		</DiarySimpleContainer>
 	)

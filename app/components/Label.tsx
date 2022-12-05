@@ -8,7 +8,6 @@ import { Text } from "react-native"
 import { BLACK, GRAY } from "../styles"
 
 type LabelProps = {
-
 	gray?: boolean,
 }
 

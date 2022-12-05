@@ -23,12 +23,14 @@ import { findDiary } from "../utils"
 const Year = styled(Text)`
 	font-size: 20px;
 	color: ${BLACK};
+	font-weight: bold;
 `
 
 const Month = styled(Text)`
 	font-size: 30px;
 	color: ${BLACK};
 	margin-bottom: ${vh(5)}px;
+	font-weight: bold;
 `
 
 const DayContainer = styled(View)`
@@ -98,7 +100,7 @@ function Calendar() {
 		}
 	}, [selectedMonth, selectedYear])
 
-	const returnDate = (): Array<ReactNode> => {
+	const returnDate = useCallback(() => {
 		let date = Array()
 		for (const nowDay of WEEK) {
 			const day = new Date(selectedYear, selectedMonth - 1, 1).getDay()
@@ -135,7 +137,7 @@ function Calendar() {
 			}
 		}
 		return date
-	}
+	}, [selectedYear, selectedMonth, diary])
 
 	return (
 		<Container>

@@ -6,7 +6,7 @@ import { useIsFocused } from "@react-navigation/native"
 // component
 import Container from "../components/Container"
 import Calendar from "../components/Calendar"
-import WriteButton from "../components/WriteButton"
+import WriteButton from "../components/ListButton"
 import useStore from "../store/zustand"
 
 function Home() {

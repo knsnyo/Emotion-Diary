@@ -20,11 +20,7 @@ import { addDiary } from "../utils"
 
 type routeProps = RouteProp<StackParamList, ScreenName.DiaryWrite>
 
-type DiaryFormProps = {
-	editable?: boolean
-}
-
-function DiaryForm(props: DiaryFormProps) {
+function DiaryForm() {
 	const navigation = useNavigation<StackNavigationProp>()
 	const route = useRoute<routeProps>()
 	const [memo, setMemo] = useState<string>("")
