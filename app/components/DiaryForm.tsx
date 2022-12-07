@@ -24,6 +24,7 @@ function DiaryForm() {
 	const navigation = useNavigation<StackNavigationProp>()
 	const route = useRoute<routeProps>()
 	const [memo, setMemo] = useState<string>("")
+	const [url, setUrl] = useState<string>("v_lb75c-Xks")
 
 	const diaryWriteHandler = async () => {
 		const newDiary: DiaryContent = {
@@ -32,12 +33,18 @@ function DiaryForm() {
 			year: route.params.year,
 			month: route.params.month,
 			date: route.params.date,
-			day: route.params.day
+			day: route.params.day,
+			music: "v_lb75c-Xks"
 		}
 		await addDiary(newDiary)
 
 		navigation.popToTop()
 	}
+
+	const setMusicHandler = () => {
+
+	}
+
 	return (
 		<Container>
 			<Emotion
@@ -54,6 +61,9 @@ function DiaryForm() {
 			/>
 			<BottomBar>
 				<Icon name="photo" size={20} />
+				<Pressable onPress={setMusicHandler}>
+					<Icon name="audiotrack" size={20} />
+				</Pressable>
 				<Pressable onPress={diaryWriteHandler}>
 					<Icon name="check" size={20} />
 				</Pressable>
