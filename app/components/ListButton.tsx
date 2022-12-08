@@ -16,13 +16,15 @@ import { ScreenName, WEEK } from "../types"
 // utils
 import { findDiary } from "../utils"
 
+const px = 30
+
 const ListButtonContainer = styled(Floating)`
-	left: ${vw(50) - 25}px;
+	left: ${vw(50) - px}px;
 	bottom: ${vh(5)}px;
 	background-color: ${BEIGE};
-	width: 50px;
-	height: 50px;
-	border-radius: 25px;
+	width: ${px * 2}px;
+	height: ${px * 2}px;
+	border-radius: ${px}px;
 `
 
 function ListButton() {

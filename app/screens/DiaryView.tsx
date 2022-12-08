@@ -4,7 +4,6 @@ import DiaryDetail from "../components/DiaryDetail"
 import YoutubeScreen from "../components/YoutubeScreen"
 
 // navigation
-
 import { RouteProp, useRoute } from "@react-navigation/native"
 
 // types
@@ -17,7 +16,7 @@ function DiaryView() {
 
 	return (
 		<Container>
-			{undefined !== route.params.music && <YoutubeScreen />}
+			{route.params.music && <YoutubeScreen />}
 			<DiaryDetail />
 		</Container>
 	)

@@ -4,6 +4,7 @@ import uuid from "react-native-uuid"
 import { Pressable } from "react-native"
 import Icon from "react-native-vector-icons/MaterialIcons"
 import { RouteProp, useNavigation, useRoute } from "@react-navigation/native"
+import YoutubeLinkModal from "./YotubeLinkModal"
 
 // component
 import Container from "./Container"
@@ -24,7 +25,8 @@ function DiaryForm() {
 	const navigation = useNavigation<StackNavigationProp>()
 	const route = useRoute<routeProps>()
 	const [memo, setMemo] = useState<string>("")
-	const [url, setUrl] = useState<string>("v_lb75c-Xks")
+	const [url, setUrl] = useState<string>("")
+	const [modal, setModal] = useState<boolean>(false)
 
 	const diaryWriteHandler = async () => {
 		const newDiary: DiaryContent = {
@@ -34,15 +36,11 @@ function DiaryForm() {
 			month: route.params.month,
 			date: route.params.date,
 			day: route.params.day,
-			music: "v_lb75c-Xks"
+			music: url
 		}
 		await addDiary(newDiary)
 
 		navigation.popToTop()
-	}
-
-	const setMusicHandler = () => {
-
 	}
 
 	return (
@@ -52,6 +50,7 @@ function DiaryForm() {
 			/>
 			<Label>{route.params.year}년 {route.params.month}월 {route.params.date}일</Label>
 			<Label gray>{route.params.day}요일</Label>
+			{url && <Label>YOUTUBE LINK: {url}</Label>}
 			<Memo
 				placeholder="수고했어 오늘도!!"
 				multiline
@@ -60,14 +59,19 @@ function DiaryForm() {
 				autoFocus
 			/>
 			<BottomBar>
-				<Icon name="photo" size={20} />
-				<Pressable onPress={setMusicHandler}>
+				{/* <Icon name="photo" size={20} /> */}
+				<Pressable onPress={() => setModal((prev) => !prev)}>
 					<Icon name="audiotrack" size={20} />
 				</Pressable>
 				<Pressable onPress={diaryWriteHandler}>
 					<Icon name="check" size={20} />
 				</Pressable>
 			</BottomBar>
+			<YoutubeLinkModal
+				modal={modal}
+				setModal={setModal}
+				setUrl={setUrl}
+			/>
 		</Container>
 	)
 }

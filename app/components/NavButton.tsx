@@ -33,7 +33,8 @@ function NavButton(props: NavButtonProps) {
 				date: props.data?.date || 0,
 				day: props.data?.day || "",
 				pic: props.data?.pic || "",
-				emotion: props.data?.emotion || ""
+				emotion: props.data?.emotion || "",
+				music: props.data.music || "",
 			})
 		} else {
 			navigation.push(nav)

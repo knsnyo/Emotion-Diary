@@ -15,7 +15,7 @@ import Swipe from "./Swipe"
 import { RED, GRAY, BLUE, BLACK, vh, vw, BEIGE } from "../styles"
 
 // types
-import { ScreenName, WEEK, MONTH, Today } from "../types"
+import { ScreenName, WEEK, MONTH, Today, DiaryContent } from "../types"
 
 // utils
 import { findDiary } from "../utils"
@@ -113,7 +113,7 @@ function Calendar() {
 						date: i + 1,
 						day: WEEK[(day + i) % 7]
 					}
-					let find = findDiary(diary, thisDay)
+					let find: DiaryContent | boolean = findDiary(diary, thisDay)
 					date = [...date,
 					<Day key={i + 1}>
 						<NavButton
@@ -137,7 +137,7 @@ function Calendar() {
 			}
 		}
 		return date
-	}, [selectedYear, selectedMonth, diary])
+	}, [diary])
 
 	return (
 		<Container>

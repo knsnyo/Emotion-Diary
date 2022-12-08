@@ -16,8 +16,13 @@ import { RouteProp, useRoute } from "@react-navigation/native"
 import { ScreenName, StackParamList } from "../types"
 
 const YoutubeContainer = styled(Container)`
-	flex: none;
 	margin: 10px;
+	flex: none;
+	border: 10px solid black;
+	border-radius: 8px;
+	justify-content: center;
+	align-items: center;
+	background-color: black;
 `
 
 type routeProps = RouteProp<StackParamList, ScreenName.DiaryView>
@@ -39,7 +44,7 @@ function YoutubeScreen() {
 			<YoutubePlayer
 				ref={playerRef}
 				width={vw(90)}
-				height={vh(30)}
+				height={vh(25)}
 				videoId={route.params.music}
 				play={playing}
 				onChangeState={onStateChange}
