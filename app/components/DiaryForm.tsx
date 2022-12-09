@@ -40,7 +40,7 @@ function DiaryForm() {
 		}
 		await addDiary(newDiary)
 
-		navigation.popToTop()
+		navigation.pop()
 	}
 
 	return (

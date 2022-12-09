@@ -137,7 +137,7 @@ function Calendar() {
 			}
 		}
 		return date
-	}, [diary])
+	}, [diary, selectedMonth])
 
 	return (
 		<Container>

@@ -1,7 +1,6 @@
 // library
 import { useEffect } from "react"
 import AsyncStorage from "@react-native-async-storage/async-storage"
-import { useIsFocused } from "@react-navigation/native"
 
 // component
 import Container from "../components/Container"
@@ -11,7 +10,6 @@ import useStore from "../store/zustand"
 
 function Home() {
 	const { diary, initDiary } = useStore()
-	const isFocused = useIsFocused()
 
 	useEffect(() => {
 		const init = async () => {
@@ -24,7 +22,7 @@ function Home() {
 			}
 		}
 		init()
-	}, [isFocused, diary])
+	}, [diary])
 
 	return (
 		<Container>
