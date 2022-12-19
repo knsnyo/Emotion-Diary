@@ -1,6 +1,7 @@
 // library
 import { useEffect } from "react"
 import AsyncStorage from "@react-native-async-storage/async-storage"
+import { useIsFocused } from "@react-navigation/native"
 
 // component
 import Container from "../components/Container"
@@ -10,6 +11,7 @@ import useStore from "../store/zustand"
 
 function Home() {
 	const { diary, initDiary } = useStore()
+	const isFocused = useIsFocused()
 
 	useEffect(() => {
 		const init = async () => {
@@ -18,11 +20,13 @@ function Home() {
 				const item = await AsyncStorage.getItem("diary")
 				const data = await JSON.parse(item || "{}")
 				initDiary([...data])
+				console.log(data)
+				console.log(diary)
 			} catch (err) {
 			}
 		}
 		init()
-	}, [diary])
+	}, [diary, isFocused])
 
 	return (
 		<Container>

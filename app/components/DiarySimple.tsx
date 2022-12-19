@@ -45,9 +45,9 @@ function DiarySimple(props: DiarySimpleProps) {
 				data={props.diary}
 			>
 				<DiarySimpleHeader>
-					<Emotion
+					{/* <Emotion
 						source={require("../assets/image/profile.jpg")}
-					/>
+					/> */}
 					<Date>
 						<Label>{props.diary.month}월 {props.diary.date}일</Label>
 						<Label gray>{props.diary.day}요일</Label>

@@ -45,9 +45,9 @@ function DiaryForm() {
 
 	return (
 		<Container>
-			<Emotion
+			{/* <Emotion
 				source={require("../assets/image/profile.jpg")}
-			/>
+			/> */}
 			<Label>{route.params.year}년 {route.params.month}월 {route.params.date}일</Label>
 			<Label gray>{route.params.day}요일</Label>
 			{url && <Label>YOUTUBE LINK: {url}</Label>}

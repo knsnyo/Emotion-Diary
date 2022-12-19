@@ -5,6 +5,7 @@ import { FlatList, ListRenderItem } from "react-native"
 // component
 import Container from "../components/Container"
 import DiarySimple from "../components/DiarySimple"
+import Label from "../components/Label"
 
 // types
 import { DiaryContent } from "../types"
@@ -18,7 +19,7 @@ function DiaryList() {
 
 	return (
 		<Container>
-			<FlatList
+			{0 !== diary.length ? (<FlatList
 				data={diary.sort(function (a: DiaryContent, b: DiaryContent) {
 					if (a.year > b.year) return -1
 					else if (a.year < b.year) return 1
@@ -29,7 +30,9 @@ function DiaryList() {
 				})}
 				renderItem={renderItem}
 				keyExtractor={item => item.id}
-			/>
+			/>) : (
+				<Label>아직 일기가 없어요!</Label>
+			)}
 		</Container>
 	)
 }
